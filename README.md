@@ -81,11 +81,11 @@ composer {script} -- --env=jenkins --notty
 
 ### Scripts
 
-#### `test`
+#### `spec-coverage`
 
 ```
 Usage:
-  test [--] [options]
+  spec-test [--] [options]
 
 Options:
       --fail     Exit with 1 if tests fail.
@@ -93,11 +93,11 @@ Options:
    -v --verbose  Increase the verbosity of messages.
 ```
 
-#### `coverage`
+#### `spec-coverage`
 
 ```
 Usage:
-  coverage [--] [options]
+  spec-coverage [--] [options]
 
 Options:
       --env    Specifiy the environment. Possible values:
@@ -130,7 +130,7 @@ Usage:
 Options:
       --env    Specifiy the environment. Possible values:
                'local': prints output on command-line.
-               'jenkins': generates a xml report file.
+               'jenkins': generates a json report file (phpstan.json).
       --notty  Disable TTY.
 ```
 
@@ -139,12 +139,12 @@ Options:
 
 ```
 Usage:
-  lint [--] [options]
+  md [--] [options]
 
 Options:
       --env    Specifiy the environment. Possible values:
                'local': prints output on command-line.
-               'jenkins': generates a xml report file.
+               'jenkins': generates a xml report file (phpmd.xml).
       --notty  Disable TTY.
 ```
 
@@ -155,7 +155,8 @@ Usage:
   fix [--] [options]
 
 Options:
-      --notty  Disable TTY.
+      --dry-run  Show changes to be applyed. 
+      --notty    Disable TTY.
 ```
 
 ## Using custom matchers
