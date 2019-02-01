@@ -1,13 +1,18 @@
 {
-    "name": "karriere/code-quality",
-    "description": "Code Quality scripts that can be run via Composer.",
-    "keywords": ["code quality", "scripts"],
+    "name": "aretche/php-code-quality",
+    "description": "Code Quality scripts that can be run via Composer in Symfony projects. (forked from karriere/code-quality)",
+    "keywords": ["symfony", "code quality", "scripts"],
     "license": "Apache-2.0",
     "authors": [
         {
             "name": "Jakob Linskeseder",
             "email": "jakob.linskeseder@karriere.at",
-            "role": "Maintainer"
+            "role": "Maintainer (original project)"
+        },
+        {
+            "name": "Gabriel Arellano",
+            "email": "gabrielarellano@gmail.com",
+            "role": "Developer (current fork)"
         }
     ],
     "autoload": {
@@ -30,8 +35,8 @@
         "composer/composer": "^1.6"
     },
     "scripts": {
-        "test": "Karriere\\CodeQuality\\SpecificationTest::run",
-        "coverage": "Karriere\\CodeQuality\\CodeCoverage::run",
+        "spec-test": "Karriere\\CodeQuality\\SpecificationTest::run",
+        "spec-coverage": "Karriere\\CodeQuality\\CodeCoverage::run",
         "lint": "Karriere\\CodeQuality\\CodeStyleChecker::run",
         "fix": "Karriere\\CodeQuality\\CodeStyleFixer::run",
         "md": "Karriere\\CodeQuality\\MessDetector::run"

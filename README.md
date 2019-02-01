@@ -49,10 +49,10 @@ After installing, insert the desired scripts to your `composer.json`.
 ```json
 {
     "scripts": {
-        "test": "Karriere\\CodeQuality\\SpecificationTest::run",
+        "spec-test": "Karriere\\CodeQuality\\SpecificationTest::run",
         "lint": "Karriere\\CodeQuality\\CodeStyleChecker::run",
         "fix": "Karriere\\CodeQuality\\CodeStyleFixer::run",
-        "coverage": "Karriere\\CodeQuality\\CodeCoverage::run",
+        "spec-coverage": "Karriere\\CodeQuality\\CodeCoverage::run",
         "md": "Karriere\\CodeQuality\\MessDetector::run"
     }
 }
