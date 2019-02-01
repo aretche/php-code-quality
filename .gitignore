@@ -1,3 +1,6 @@
 /vendor
 /coverage
 coverage.xml
+
+# Intellij IDEA / PHPStorm
+.idea/*
