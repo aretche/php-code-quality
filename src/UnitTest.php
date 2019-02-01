@@ -17,8 +17,8 @@ class UnitTest implements ComposerScriptInterface
      */
     private static $commands = [
         'default' => 'phpunit ',
-        'verbose' => 'phpspec -v',
-        'v'       => 'phpspec -v'
+        'verbose' => 'phpunit -v',
+        'v'       => 'phpunit -v'
     ];
 
     public static function run(Event $event)
