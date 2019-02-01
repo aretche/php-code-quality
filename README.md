@@ -1,7 +1,6 @@
-<a href="https://www.karriere.at/" target="_blank"><img width="200" src="http://www.karriere.at/images/layout/katlogo.svg"></a>
-<span>&nbsp;&nbsp;&nbsp;</span>
-[![Build Status](https://travis-ci.org/karriereat/php-code-quality.svg?branch=master)](https://travis-ci.org/karriereat/php-code-quality)
-[![Code Style](https://styleci.io/repos/79470259/shield)](https://styleci.io/repos/79470259)
+
+[![Build Status](https://travis-ci.org/aretche/php-code-quality.svg?branch=master)](https://travis-ci.org/aretche/php-code-quality)
+[![Code Style](https://styleci.io/repos/168615452/shield)](https://styleci.io/repos/168615452)
 
 # Code Quality for PHP packages
 
@@ -23,7 +22,7 @@ This extension requires a `phpspec-coverage.yml` file in your root folder and Xd
 ### [FriendsOfPHP/PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 
 Currently used for fixing the code.   
-Fixes all files in `src` directory.
+Fixes all files in `src` directory according Symfony coding guidelines.
 
 This package is not used for checking (linting), because PHP_Codesniffer prints a 
 more readable output.
@@ -40,9 +39,15 @@ This package could also be used for fixing, but PHP-CS-Fixer does it better.
 Used for mess detection.   
 Runs the defined ruleset (`config/phpmd.xml`) on all files in `src` directory.
 
+### [phpstan/phpstan](https://github.com/phpstan/phpstan)
+
+Used for static analysis.   
+Perform static analysis on all files in `src` directory.
+
+
 ## Installation
 
-Run `composer require --dev karriere/code-quality` to install this package.
+Run `composer require --dev aretche/php-code-quality` to install this package.
 
 After installing, insert the desired scripts to your `composer.json`.
 
@@ -53,7 +58,8 @@ After installing, insert the desired scripts to your `composer.json`.
         "lint": "Karriere\\CodeQuality\\CodeStyleChecker::run",
         "fix": "Karriere\\CodeQuality\\CodeStyleFixer::run",
         "spec-coverage": "Karriere\\CodeQuality\\CodeCoverage::run",
-        "md": "Karriere\\CodeQuality\\MessDetector::run"
+        "md": "Karriere\\CodeQuality\\MessDetector::run",
+        "static": "Karriere\\CodeQuality\\StaticAnalyzer::run"
     }
 }
 ```
@@ -114,6 +120,20 @@ Options:
       --fail   Exit with 1 if linting fails.
       --notty  Disable TTY.
 ```
+
+#### `static`
+
+```
+Usage:
+  static [--] [options]
+
+Options:
+      --env    Specifiy the environment. Possible values:
+               'local': prints output on command-line.
+               'jenkins': generates a xml report file.
+      --notty  Disable TTY.
+```
+
 
 #### `md`
 
