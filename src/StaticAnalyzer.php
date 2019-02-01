@@ -17,7 +17,7 @@ class StaticAnalyzer implements ComposerScriptInterface
      */
     private static $commands = [
         'local'   => 'phpstan analyse -c ' . __DIR__ . '/../config/config.level7.neon src --level=7 --ansi',
-        'jenkins' => 'phpstan analyse -c ' . __DIR__ . '/../config/config.level7.neon src --level=7 --ansi --no-progress -n'
+        'jenkins' => 'phpstan analyse -c ' . __DIR__ . '/../config/config.level7.neon src --level=7 --ansi --no-progress -n --error-format=prettyJson > phpstan.json'
     ];
 
     public static function run(Event $event)
