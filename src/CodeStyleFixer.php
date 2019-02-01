@@ -5,7 +5,6 @@ namespace Karriere\CodeQuality;
 use Composer\Script\Event;
 use Karriere\CodeQuality\Console\ScriptArgumentsTrait;
 use Karriere\CodeQuality\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class CodeStyleFixer implements ComposerScriptInterface
 {
@@ -14,18 +13,25 @@ class CodeStyleFixer implements ComposerScriptInterface
     /**
      * The code style fixer command.
      *
-     * @var string
+     * @var array
      */
-    private static $command = 'php-cs-fixer fix src --rules=@Symfony --using-cache=false';
+    private static $commands = [
+        'default' => 'php-cs-fixer fix src --rules=@Symfony --using-cache=false',
+        'dry-run' => 'php-cs-fixer fix src --rules=@Symfony --using-cache=false --dry-run --diff',
+    ];
+    //private static $command = 'php-cs-fixer fix src --rules=@Symfony --using-cache=false';
 
     public static function run(Event $event)
     {
         $eventArguments = self::getComposerScriptArguments($event->getArguments());
 
-        $composerIO = $event->getIO();
-        $composerIO->write('<info>Running </info><fg=green;options=bold>' . self::$command . '</>');
+        $command = self::getArrayValueByEventArguments(self::$commands, $eventArguments);
 
-        $process = new Process(self::$command);
+        $composerIO = $event->getIO();
+
+        $composerIO->write('<info>Running </info><fg=green;options=bold>'.$command.'</>');
+
+        $process = new Process($command);
         $process->setTtyByArguments($eventArguments);
         $process->setProcessTimeoutByArguments($eventArguments);
         $process->run();
@@ -34,8 +40,10 @@ class CodeStyleFixer implements ComposerScriptInterface
 
         $exitCode = $process->getExitCode();
 
-        if ($exitCode !== ComposerScriptInterface::EXIT_CODE_OK) {
-            throw new ProcessFailedException($process);
+        if ($exitCode === ComposerScriptInterface::EXIT_CODE_OK) {
+            $composerIO->write('<fg=black;bg=green>Finished without errors!</>');
+        } elseif (self::hasParameterOption(ComposerScriptInterface::FLAG_FAIL, $eventArguments)) {
+            $composerIO->write('<fg=black;bg=red>Finished with errors!</>');
         }
 
         return $exitCode;
