@@ -6,26 +6,30 @@ use Composer\Script\Event;
 use Karriere\CodeQuality\Console\ScriptArgumentsTrait;
 use Karriere\CodeQuality\Process\Process;
 
-class SpecificationTest implements ComposerScriptInterface
+class CloverCoverageCheck implements ComposerScriptInterface
 {
     use ScriptArgumentsTrait;
 
     /**
-     * The code phpspec command.
+     * The code coverage check command.
      *
      * @var array
      */
     private static $commands = [
-        'default' => 'phpspec run',
-        'verbose' => 'phpspec run -v',
-        'v'       => 'phpspec run -v'
+        'default' => 'coverage-checker clover.xml 100',
+        '0'  => 'coverage-checker clover.xml 0',
+        '25' => 'coverage-checker clover.xml 25',
+        '50' => 'coverage-checker clover.xml 50',
+        '75' => 'coverage-checker clover.xml 75',
+        '100' => 'coverage-checker clover.xml',
+
     ];
 
     public static function run(Event $event)
     {
         $eventArguments = self::getComposerScriptArguments($event->getArguments());
 
-        $command = self::getArrayValueByEventArguments(self::$commands, $eventArguments);
+        $command = self::getArrayValueByEventArguments(self::$commands, $eventArguments, 'min-coverage');
 
         $composerIO = $event->getIO();
         $composerIO->write('<info>Running </info><fg=green;options=bold>' . $command . '</>');

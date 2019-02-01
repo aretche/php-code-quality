@@ -6,19 +6,19 @@ use Composer\Script\Event;
 use Karriere\CodeQuality\Console\ScriptArgumentsTrait;
 use Karriere\CodeQuality\Process\Process;
 
-class SpecificationTest implements ComposerScriptInterface
+class UnitTest implements ComposerScriptInterface
 {
     use ScriptArgumentsTrait;
 
     /**
-     * The code phpspec command.
+     * The code phpunit command.
      *
      * @var array
      */
     private static $commands = [
-        'default' => 'phpspec run',
-        'verbose' => 'phpspec run -v',
-        'v'       => 'phpspec run -v'
+        'default' => 'phpunit ',
+        'verbose' => 'phpspec -v',
+        'v'       => 'phpspec -v'
     ];
 
     public static function run(Event $event)

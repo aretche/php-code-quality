@@ -11,14 +11,6 @@ The scripts also work on continous integration (CI) servers like Jenkins.
 
 ## Used packages
 
-### [phpspec/phpspec](https://github.com/phpspec/phpspec)
-
-Used for testing (SpecBDD) the code.   
-Must be configured with a `phpspec.yml` file in your root folder.
-
-We are using the `leanphp/phpspec-code-coverage` extension for generating coverage reports.   
-This extension requires a `phpspec-coverage.yml` file in your root folder and Xdebug enabled.
-
 ### [FriendsOfPHP/PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 
 Currently used for fixing the code.   
@@ -44,6 +36,23 @@ Runs the defined ruleset (`config/phpmd.xml`) on all files in `src` directory.
 Used for static analysis.   
 Perform static analysis on all files in `src` directory.
 
+### [phpunit/phpunit](https://phpunit.de)
+
+Used for testing the code.   
+Must be configured with a `phpunit.xml` file in your root folder.
+
+### [lchrusciel/api-test-case](https://github.com/lchrusciel/ApiTestCase)
+
+Based on PHPUnit and used for testing API methods.
+   
+
+### [phpspec/phpspec](https://github.com/phpspec/phpspec)
+
+Used for testing (SpecBDD) the code.   
+Must be configured with a `phpspec.yml` file in your root folder.
+
+We are using the `leanphp/phpspec-code-coverage` extension for generating coverage reports.   
+This extension requires a `phpspec-coverage.yml` file in your root folder and Xdebug enabled.
 
 ## Installation
 
@@ -54,12 +63,15 @@ After installing, insert the desired scripts to your `composer.json`.
 ```json
 {
     "scripts": {
-        "spec-test": "Karriere\\CodeQuality\\SpecificationTest::run",
         "lint": "Karriere\\CodeQuality\\CodeStyleChecker::run",
         "fix": "Karriere\\CodeQuality\\CodeStyleFixer::run",
-        "spec-coverage": "Karriere\\CodeQuality\\CodeCoverage::run",
         "md": "Karriere\\CodeQuality\\MessDetector::run",
-        "static": "Karriere\\CodeQuality\\StaticAnalyzer::run"
+        "static": "Karriere\\CodeQuality\\StaticAnalyzer::run",
+        "unit-test": "Karriere\\CodeQuality\\UnitTest::run",
+        "unit-coverage": "Karriere\\CodeQuality\\UnitCoverage::run",
+        "check-coverage": "Karriere\\CodeQuality\\CloverCoverageCheck::run",
+        "spec-test": "Karriere\\CodeQuality\\SpecificationTest::run",
+        "spec-coverage": "Karriere\\CodeQuality\\CodeCoverage::run"
     }
 }
 ```
@@ -80,32 +92,6 @@ composer {script} -- --env=jenkins --notty
 ```
 
 ### Scripts
-
-#### `spec-coverage`
-
-```
-Usage:
-  spec-test [--] [options]
-
-Options:
-      --fail     Exit with 1 if tests fail.
-      --notty    Disable TTY.
-   -v --verbose  Increase the verbosity of messages.
-```
-
-#### `spec-coverage`
-
-```
-Usage:
-  spec-coverage [--] [options]
-
-Options:
-      --env    Specifiy the environment. Possible values:
-               'local': prints output on command-line.
-               'jenkins': generates a JUnit report file.
-      --notty  Disable TTY.
-
-```
 
 #### `lint`
 
@@ -158,6 +144,72 @@ Options:
       --dry-run  Show changes to be applyed. 
       --notty    Disable TTY.
 ```
+
+#### `unit-test`
+
+```
+Usage:
+  unit-test [--] [options]
+
+Options:
+      --fail     Exit with 1 if tests fail.
+      --notty    Disable TTY.
+   -v --verbose  Increase the verbosity of messages.
+```
+
+#### `unit-coverage`
+
+```
+Usage:
+  unit-coverage [--] [options]
+
+Options:
+      --env    Specifiy the environment. Possible values:
+               'local': generate html report in coverage directory.
+               'jenkins': generates clover.xml coverage report in root directory.
+      --notty  Disable TTY.
+
+```
+
+#### `check-coverage`
+
+```
+Usage:
+  check-coverage [--] [options]
+
+Options:
+      --min-coverage    Specify minimal coverage level. Possible
+                        values: 0, 25, 50, 100 (default)    
+      --fail            Exit with 1 on insufficient coverage.
+      --notty           Disable TTY.
+```
+
+#### `spec-test`
+
+```
+Usage:
+  spec-test [--] [options]
+
+Options:
+      --fail     Exit with 1 if tests fail.
+      --notty    Disable TTY.
+   -v --verbose  Increase the verbosity of messages.
+```
+
+#### `spec-coverage`
+
+```
+Usage:
+  spec-coverage [--] [options]
+
+Options:
+      --env    Specifiy the environment. Possible values:
+               'local': prints output on command-line.
+               'jenkins': generates a JUnit report file.
+      --notty  Disable TTY.
+
+```
+
 
 ## Using custom matchers
 
