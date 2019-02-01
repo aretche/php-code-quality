@@ -30,12 +30,12 @@ parameters:
 	reportMagicMethods: false
 	reportMagicProperties: false
 	ignoreErrors:
-		- '#Call to an undefined method [a-zA-Z0-9\\_<>:]+::findOneBy[A-Z][a-zA-Z]*\(\)#'
+		- '#Call to an undefined method [a-zA-Z0-9\\_<>:]+::find[A-Z][a-zA-Z]*\(\)#'
 	internalErrorsCountLimit: 50
 	cache:
 	    nodesByFileCountMax: 512
 	    nodesByStringCountMax: 512
-	reportUnmatchedIgnoredErrors: true
+	reportUnmatchedIgnoredErrors: false
 	scopeClass: PHPStan\Analyser\Scope
 	universalObjectCratesClasses:
 		- stdClass
