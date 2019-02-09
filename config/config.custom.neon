@@ -1,0 +1,11 @@
+includes:
+	- config.level7.neon
+	- ../../../phpstan/phpstan-doctrine/extension.neon
+
+parameters:
+	symfony:
+	    container_xml_path: var/cache/dev/appDevDebugProjectContainer.xml
+	ignoreErrors:
+	    # Ignore Doctrine dynamic finders
+	    - '#Call to an undefined method [a-zA-Z0-9\\_<>:]+::find[A-Z][a-zA-Z]*\(\)#'
+	reportUnmatchedIgnoredErrors: false
