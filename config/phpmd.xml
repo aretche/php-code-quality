@@ -10,15 +10,12 @@
         PHPMD custom rule set for Symfony projects
     </description>
 
-    <rule ref="rulesets/cleancode.xml">
-        <exclude name="BooleanArgumentFlag" />
-        <exclude name="ElseExpression" />
-    </rule>
     <rule ref="rulesets/naming.xml">
         <exclude name="ShortVariable"/>
         <exclude name="LongVariable"/>
+        <exclude name="BooleanGetMethodName"/>
     </rule>
-    <!-- Redefining ShortVariable excluding $id and $em  -->
+    <!-- Redefining ShortVariable excluding $id, $em and $qb common in Symfony projects -->
     <rule ref="rulesets/naming.xml/ShortVariable"
           since="0.2"
           message="Avoid variables with short names like {0}. Configured minimum length is {1}."
@@ -27,7 +24,7 @@
         <priority>3</priority>
         <properties>
             <property name="minimum" description="Minimum length for a variable, property or parameter name" value="3"/>
-            <property name="exceptions" value="id,em" />
+            <property name="exceptions" value="id,em,qb" />
         </properties>
     </rule>
     <rule ref="rulesets/unusedcode.xml"/>
