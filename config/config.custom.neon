@@ -1,5 +1,4 @@
 includes:
-	- config.level7.neon
 	- ../../../phpstan/phpstan-doctrine/extension.neon
 
 parameters:
