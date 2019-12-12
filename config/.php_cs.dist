@@ -1,0 +1,30 @@
+<?php
+/**
+ * Archivo de configuración para PHP-CS-Fixer
+ * Más información en: https://github.com/FriendsOfPHP/PHP-CS-Fixer
+ */
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$fixers = [
+    '@Symfony' => true
+];
+
+$excludes = [
+    'bin',
+    'vendor',
+    'tests',
+    'var',
+    'web',
+];
+
+return Config::create()
+    ->setRiskyAllowed(true)
+    ->setUsingCache(false)
+    ->setRules($fixers)
+    ->setFinder(
+        Finder::create()
+           ->exclude($excludes)
+           ->in(__DIR__)
+    );
