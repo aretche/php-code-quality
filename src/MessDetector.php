@@ -11,8 +11,8 @@ class MessDetector implements ComposerScriptInterface
     use ScriptArgumentsTrait;
 
     private static $commands = [
-        'local' => 'phpmd src text ' . __DIR__ . '/../config/phpmd.xml',
-        'jenkins' => 'phpmd src xml ' . __DIR__ . '/../config/phpmd.xml --reportfile phpmd.xml'
+        'local' => 'phpmd src text phpmd-dist.xml',
+        'jenkins' => 'phpmd src xml phpmd-dist.xml --reportfile phpmd.xml'
     ];
 
     public static function run(Event $event)

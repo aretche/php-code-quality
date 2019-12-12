@@ -16,8 +16,9 @@ class CodeStyleFixer implements ComposerScriptInterface
      * @var array
      */
     private static $commands = [
-        'default' => 'php-cs-fixer fix src --rules=@Symfony --using-cache=false',
-        'dry-run' => 'php-cs-fixer fix src --rules=@Symfony --using-cache=false --dry-run --diff',
+        'default' => 'php-cs-fixer fix',
+        'dry-run' => 'php-cs-fixer fix --dry-run',
+        'dry-run-diff' => 'php-cs-fixer fix --dry-run --diff',
     ];
     //private static $command = 'php-cs-fixer fix src --rules=@Symfony --using-cache=false';
 

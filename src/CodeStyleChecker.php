@@ -17,8 +17,8 @@ class CodeStyleChecker implements ComposerScriptInterface
      * @var array
      */
     private static $commands = [
-        'local'   => 'phpcs src --standard=PSR2 --colors',
-        'jenkins' => 'phpcs src --standard=PSR2 --report=checkstyle --report-file=checkstyle.xml'
+        'local'   => 'php-cs-fixer fix --dry-run --diff',
+        'jenkins' => 'php-cs-fixer fix --dry-run --diff --format=checkstyle'
     ];
 
     public static function run(Event $event)
